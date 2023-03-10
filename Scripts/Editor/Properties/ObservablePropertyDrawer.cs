@@ -21,13 +21,18 @@ namespace FullCircleData.Editor.Editor.Properties
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.BeginChangeCheck();
             ObservableUtils.DrawStatus(position, target.Connected);
-            EditorGUI.PropertyField(position, property.FindPropertyRelative("value"), label);
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("value"), label, true);
             EditorGUI.EndProperty();
             if (EditorGUI.EndChangeCheck())
             {
                 property.serializedObject.ApplyModifiedProperties();
                 target.DispatchChange();
             }
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property.FindPropertyRelative("value"), label, true);
         }
     }
 }

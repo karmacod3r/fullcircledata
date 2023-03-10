@@ -24,7 +24,7 @@ namespace FullCircleData
     /// <see cref="GetComponentsInChildrenAttribute"/>
     /// <see cref="GetComponentsInParentAttribute"/>
     [ExecuteAlways]
-    public class BestBehaviour : MonoBehaviour
+    public abstract class BestBehaviour : MonoBehaviour
     {
         /// <summary>
         /// Cached observers
@@ -143,7 +143,8 @@ namespace FullCircleData
         }
 
         /// <summary>
-        /// Retrieves all fields implementing IObserver and tries to connect them to Model fields in the parent transform tree. 
+        /// Retrieves all fields implementing IObserver and tries to connect them to Model fields in the parent transform tree.
+        /// <see cref="BindingAttribute"/>
         /// </summary>
         private void ConnectObservers()
         {
@@ -193,7 +194,8 @@ namespace FullCircleData
         }
 
         /// <summary>
-        /// Retrieves all methods decorated with ReceiveAttrivute and tries to connect them to Model fields in the parent transform tree. 
+        /// Retrieves all methods decorated with ReceiveAttribute and tries to connect them to Model fields in the parent transform tree.
+        /// <see cref="ReceiveAttribute"/> 
         /// </summary>
         private void ConnectSignalReceivers()
         {
