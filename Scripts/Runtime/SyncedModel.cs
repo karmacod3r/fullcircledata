@@ -64,10 +64,8 @@ namespace FullCircleData
             StartObserving();
         }
 
-        protected override void OnDisable()
+        protected virtual void OnDisable()
         {
-            base.OnDisable();
-            
             UnregisterInstance();
             StopObserving();
         }

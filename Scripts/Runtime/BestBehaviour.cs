@@ -24,7 +24,7 @@ namespace FullCircleData
     /// <see cref="GetComponentsInChildrenAttribute"/>
     /// <see cref="GetComponentsInParentAttribute"/>
     [ExecuteAlways]
-    public abstract class BestBehaviour : MonoBehaviour
+    public abstract class BestBehaviour : DataSource
     {
         /// <summary>
         /// Cached observers
@@ -77,8 +77,10 @@ namespace FullCircleData
         /// <summary>
         /// Unity event: Connect Observers and fill attributed fields
         /// </summary>
-        protected virtual void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+            
             InitializeMembers();
         }
 

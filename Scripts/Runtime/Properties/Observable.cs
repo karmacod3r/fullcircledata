@@ -82,9 +82,9 @@ namespace FullCircleData.Properties
         /// </summary>
         public override void DispatchChange()
         {
-            if (Model.changeBlockActive)
+            if (DataSource.changeBlockActive)
             {
-                Model.changeDispatcherQueue.Enqueue(DispatchChange);
+                DataSource.changeDispatcherQueue.Enqueue(DispatchChange);
                 return;
             }
             
