@@ -1,0 +1,16 @@
+{
+    "name": "FullCircleData.Editor",
+    "rootNamespace": "FullCircleData.Editor",
+    "references": [
+        "GUID:4a4a1d66ac37e4d20afee1e71132be0a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
