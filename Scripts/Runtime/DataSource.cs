@@ -104,7 +104,6 @@ namespace FullCircleData
             var source = context.GetComponentInParent<IDataSource>() as DataSource;
             if (source == null) return null;
 
-            source.Initialize();
             // try to get the observable from first Model component
             var observable = source.GetObservable<T>(fieldName, skipTypeCheck);
 
