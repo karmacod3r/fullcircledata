@@ -42,7 +42,7 @@ namespace FullCircleData.Properties
             Disconnect();
             
             // try to find a IObservable in the parent tree by name and type
-            observable = Model.Find<T>(context, name, skipTypeCheck);
+            observable = DataSource.Find<T>(context, name, skipTypeCheck);
             connected = observable != null;
             if (!connected)
             {

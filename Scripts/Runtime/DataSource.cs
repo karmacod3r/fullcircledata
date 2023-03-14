@@ -19,8 +19,6 @@ namespace FullCircleData
         internal static bool changeBlockActive;
         internal static Queue<Action> changeDispatcherQueue = new Queue<Action>();
 
-        private bool initializedModel;
-
         /// <summary>
         /// all observable fields
         /// </summary>
@@ -63,8 +61,7 @@ namespace FullCircleData
         /// <param name="force">Force-recache fields</param>
         private void Initialize(bool force = false)
         {
-            if (initializedModel && !force) return;
-            initializedModel = true;
+            if (!force && observableFields != null) return;
 
             observableFields = GetObservableFields();
             InitializeObservableFields();
@@ -80,6 +77,7 @@ namespace FullCircleData
         public Observable<T> GetObservable<T>(string name, bool skipTypeCheck = false)
         {
             Initialize();
+            
             var field = observableFields.Find(field => field.Name == name);
             if (field == null || !skipTypeCheck && field.FieldType.IsGenericType
                                                 && field.FieldType.GenericTypeArguments[0].UnderlyingSystemType !=
@@ -106,6 +104,7 @@ namespace FullCircleData
             var source = context.GetComponentInParent<IDataSource>() as DataSource;
             if (source == null) return null;
 
+            source.Initialize();
             // try to get the observable from first Model component
             var observable = source.GetObservable<T>(fieldName, skipTypeCheck);
 

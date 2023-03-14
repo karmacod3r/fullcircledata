@@ -80,7 +80,6 @@ namespace FullCircleData
         protected override void OnEnable()
         {
             base.OnEnable();
-            
             InitializeMembers();
         }
 

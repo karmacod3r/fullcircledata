@@ -18,11 +18,9 @@ namespace FullCircleData.Editor.Editor.Properties
         {
             var target = property.GetTarget() as IObservable;
             
-            EditorGUI.BeginProperty(position, label, property);
             EditorGUI.BeginChangeCheck();
-            ObservableUtils.DrawStatus(position, target.Connected);
+            // ObservableUtils.DrawStatus(position, target.Connected);
             EditorGUI.PropertyField(position, property.FindPropertyRelative("value"), label, true);
-            EditorGUI.EndProperty();
             if (EditorGUI.EndChangeCheck())
             {
                 property.serializedObject.ApplyModifiedProperties();
