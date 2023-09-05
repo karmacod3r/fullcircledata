@@ -27,9 +27,9 @@ namespace FullCircleData.Attributes
         
         public void TryInitialize(object obj, FieldInfo info, Transform transform)
         {
-            if (! info.FieldType.IsArray || ! typeof(Component).IsAssignableFrom(info.FieldType.GetElementType()))
+            if (! info.FieldType.IsArray)
             {
-                throw new InvalidCastException("Field type has to extend UnityEngine.Component[]");
+                throw new InvalidCastException("Field type has to be array");
             }
 
             var parents = transform.GetComponentsInParent(info.FieldType.GetElementType(), includeInactive);

@@ -17,11 +17,6 @@ namespace FullCircleData.Attributes
         
         public void TryInitialize(object obj, FieldInfo info, Transform transform)
         {
-            if (! typeof(Component).IsAssignableFrom(info.FieldType))
-            {
-                throw new InvalidCastException("Field type has to extend UnityEngine.Component");
-            }
-
             info.SetValue(obj, transform.GetComponentInParent(info.FieldType));
         }
     }
