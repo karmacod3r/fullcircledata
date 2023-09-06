@@ -48,7 +48,7 @@ namespace FullCircleData.Properties
                 if (EqualityComparer<T>.Default.Equals(this.value, value)) return;
                 this.value = value;
 
-                if (Connected && !EqualityComparer<T>.Default.Equals(base.Value, value))
+                if (connected)
                 {
                     base.Value = value;
                 }
@@ -61,7 +61,7 @@ namespace FullCircleData.Properties
 
         public override void SetValue(T newValue, bool forceDispatch = false)
         {
-            if (Connected)
+            if (connected)
             {
                 base.SetValue(newValue, forceDispatch);
                 return;
@@ -87,13 +87,15 @@ namespace FullCircleData.Properties
                 DataSource.changeDispatcherQueue.Enqueue(DispatchChange);
                 return;
             }
-            
-            if (connected)
+
+            if (!connected)
             {
-                base.SetValue(value, true);
+                ValueChanged?.Invoke();
+                observerChangeCallback?.Invoke();
+                return;
             }
             
-            ValueChanged?.Invoke();
+            base.SetValue(value, true);
         }
 
         public object GetObjectValue()
@@ -128,7 +130,6 @@ namespace FullCircleData.Properties
         private void ChangeCallback()
         {
             Value = observable.Value;
-            observerChangeCallback?.Invoke();
         }
     }
 }

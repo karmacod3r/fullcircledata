@@ -59,9 +59,7 @@ namespace FullCircleData.Properties
         /// </summary>
         public virtual void StartObserving()
         {
-            if (!connected) return;
-
-            if (changeCallback != null)
+            if (connected && changeCallback != null)
             {
                 observable.ValueChanged -= changeCallback;
                 observable.ValueChanged += changeCallback;
@@ -74,9 +72,7 @@ namespace FullCircleData.Properties
         /// </summary>
         public virtual void StopObserving()
         {
-            if (!connected) return;
-
-            if (changeCallback != null)
+            if (connected && changeCallback != null)
             {
                 observable.ValueChanged -= changeCallback;
             }
@@ -87,8 +83,6 @@ namespace FullCircleData.Properties
         /// </summary>
         public void Disconnect()
         {
-            if (!connected) return;
-
             StopObserving();
             connected = false;
             observable = new Observable<T>();
@@ -112,9 +106,7 @@ namespace FullCircleData.Properties
 
         public virtual void DispatchChange()
         {
-            if (!connected) return;
-            
-            observable.DispatchChange();
+            observable?.DispatchChange();
         }
     }
 }
