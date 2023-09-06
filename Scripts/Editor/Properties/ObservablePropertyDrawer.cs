@@ -18,8 +18,8 @@ namespace FullCircleData.Editor.Editor.Properties
         {
             var target = property.GetTarget() as IObservable;
             
-            EditorGUI.BeginChangeCheck();
             ObservableUtils.DrawStatus(position, target);
+            EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(position, property.FindPropertyRelative("value"), label, true);
             if (EditorGUI.EndChangeCheck())
             {
