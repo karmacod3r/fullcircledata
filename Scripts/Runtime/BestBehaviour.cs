@@ -153,7 +153,7 @@ namespace FullCircleData
 
             foreach (var field in AllFields)
             {
-                if (! typeof(IObservable).IsAssignableFrom(field.FieldType)) continue;
+                if (! typeof(IObserver).IsAssignableFrom(field.FieldType)) continue;
                 
                 var observer = field.GetValue(this) as IObserver;
                 if (observer == null)
