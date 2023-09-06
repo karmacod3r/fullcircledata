@@ -14,7 +14,7 @@ namespace FullCircleData.Editor.Editor.Properties
             var target = property.GetTarget() as Signal;
 
             EditorGUILayout.BeginHorizontal();
-            ObservableUtils.DrawStatus(position, target.Connected);
+            ObservableUtils.DrawStatus(position, target);
             EditorGUILayout.PrefixLabel(label);
             
             if (GUILayout.Button("Send"))

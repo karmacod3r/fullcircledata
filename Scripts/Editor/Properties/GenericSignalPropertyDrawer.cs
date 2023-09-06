@@ -15,7 +15,7 @@ namespace FullCircleData.Editor.Editor.Properties
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel(label);
             var valueProperty = property.FindPropertyRelative("value");
-            ObservableUtils.DrawStatus(position, target.Connected);
+            ObservableUtils.DrawStatus(position, target);
             EditorGUILayout.PropertyField(valueProperty, GUIContent.none);
             
             if (GUILayout.Button("Send"))
