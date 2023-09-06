@@ -90,9 +90,9 @@ namespace FullCircleData
 
             rectTransform = transform as RectTransform;
 
+            ParseCustomAttributes();
             ConnectObservers();
             ConnectObservables();
-            ParseCustomAttributes();
             StartObserving();
             ConnectSignalReceivers();
         }
