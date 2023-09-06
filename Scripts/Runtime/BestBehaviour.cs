@@ -153,8 +153,20 @@ namespace FullCircleData
 
             foreach (var field in AllFields)
             {
+                if (! typeof(IObservable).IsAssignableFrom(field.FieldType)) continue;
+                
+                var observer = field.GetValue(this) as IObserver;
+                if (observer == null)
+                {
+                    // create new instance
+                    observer = Activator.CreateInstance(field.FieldType) as IObserver;
+                    field.SetValue(this, observer);
+                }
+                observers.Add(observer);
+                
                 if (!field.CustomAttributes.Any()) continue;
 
+                // try to connect binding
                 var binding = field.GetCustomAttribute<BindingAttribute>();
                 if (binding == null) continue;
 
@@ -162,14 +174,6 @@ namespace FullCircleData
                 {
                     Debug.LogError($"BindingAttribute expects a field implementing IObserver at {field.Name}");
                     continue;
-                }
-
-                var observer = field.GetValue(this) as IObserver;
-                if (observer == null)
-                {
-                    // create new instance
-                    observer = Activator.CreateInstance(field.FieldType) as IObserver;
-                    field.SetValue(this, observer);
                 }
 
                 if (!string.IsNullOrEmpty(binding.changeListener))
@@ -189,8 +193,6 @@ namespace FullCircleData
                 {
                     observer.Connect(transform, binding.observableName);
                 }
-
-                observers.Add(observer);
             }
         }
 

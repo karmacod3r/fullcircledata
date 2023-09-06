@@ -125,11 +125,17 @@ namespace FullCircleData.Properties
         {
             observerChangeCallback = changeCallback;
             base.Connect(context.parent, name, ChangeCallback, skipTypeCheck);
+
+            if (connected)
+            {
+                ChangeCallback();
+            }
         }
 
         private void ChangeCallback()
         {
             Value = observable.Value;
+            observerChangeCallback?.Invoke();
         }
     }
 }

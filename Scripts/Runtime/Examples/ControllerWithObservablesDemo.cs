@@ -12,7 +12,7 @@ namespace FullCircleData.Examples
 
         private void OnValueChanged()
         {
-            Debug.Log("OnValueChanged: " + message.Value);
+            Debug.Log(nameof(ControllerWithObservablesDemo) + ".OnValueChanged: " + message.Value);
         }
     }
 }
