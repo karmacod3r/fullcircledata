@@ -9,6 +9,8 @@ namespace FullCircleData.Examples
     {
         [SerializeField, ChangeListener(nameof(OnValueChanged))] 
         private Observable<string> message;
+        
+        public Signal<string> signal;
 
         private void OnValueChanged()
         {

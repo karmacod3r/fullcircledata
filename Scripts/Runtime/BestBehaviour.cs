@@ -211,7 +211,13 @@ namespace FullCircleData
 
                 var parameters = method.GetParameters();
                 var observableType = parameters.Length == 0 ? typeof(SignalObserver) : parameters[0].ParameterType;
-                
+
+                if (!typeof(IObserver).IsAssignableFrom(observableType))
+                {
+                    Debug.LogWarning("ReceiveAttribute expects a parameter implementing IObserver");
+                    continue;
+                }
+
                 var observer = Activator.CreateInstance(observableType) as IObserver;
                 if (parameters.Length == 0)
                 {
