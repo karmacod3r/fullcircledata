@@ -11,6 +11,8 @@ namespace FullCircleData.Components
         [ChangeListener(nameof(BindingFieldNameChanged))]
         public Observable<string> bindingFieldName;
         public Observable<string> text;
+        [ChangeListener(nameof(TextChanged))]
+        public Observable<string> format = new("{0}");
         
         [GetComponent] private TMP_Text textComponent;
 
@@ -22,7 +24,7 @@ namespace FullCircleData.Components
 
         private void TextChanged()
         {
-            textComponent.text = text.Value;
+            textComponent.text = string.Format(format.Value, text.Value);
         }
     }
 }
