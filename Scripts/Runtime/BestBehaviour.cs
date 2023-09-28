@@ -135,11 +135,15 @@ namespace FullCircleData
 
         protected virtual void OnBeforeTransformParentChanged()
         {
+            if (!enabled) return;
+            
             OnDisable();
         }
 
         protected virtual void OnTransformParentChanged()
         {
+            if (!enabled) return;
+            
             OnEnable();
         }
 
