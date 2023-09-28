@@ -66,7 +66,7 @@ namespace FullCircleData
                 var type = GetType();
                 if (!methodCache.ContainsKey(type))
                 {
-                    methodCache[type] = GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, true, typeof(BestBehaviour));
+                    methodCache[type] = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, true, typeof(BestBehaviour));
                 }
 
                 return methodCache[type];
@@ -178,7 +178,7 @@ namespace FullCircleData
 
                 if (!string.IsNullOrEmpty(binding.changeListener))
                 {
-                    var methodInfo = GetType().GetMethod(binding.changeListener, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    var methodInfo = GetType().GetMethodIncludingBaseTypes(binding.changeListener, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                     if (methodInfo == null)
                     {
                         Debug.LogError("Change listener for " + binding + " not found");
@@ -195,7 +195,7 @@ namespace FullCircleData
                 }
             }
         }
-
+        
         /// <summary>
         /// Retrieves all methods decorated with ReceiveAttribute and tries to connect them to Model fields in the parent transform tree.
         /// <see cref="ReceiveAttribute"/> 
@@ -278,7 +278,7 @@ namespace FullCircleData
                 var observable = field.GetValue(this) as IObservable;
                 if (observable == null) continue;
 
-                var methodInfo = GetType().GetMethod(changeListener.changeListener, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var methodInfo = GetType().GetMethodIncludingBaseTypes(changeListener.changeListener, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                 if (methodInfo == null)
                 {
                     Debug.LogError("Change listener for " + changeListener + " not found");

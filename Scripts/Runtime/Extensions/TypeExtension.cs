@@ -55,5 +55,24 @@ namespace FullCircleData.Extensions
             return types.Select(type => type.GetMethods(bindingFlags))
                 .SelectMany(infos => infos);
         }
+        
+        public static MethodInfo GetMethodIncludingBaseTypes(this Type target, string methodName, BindingFlags bindingFlags)
+        {
+            var type = target;
+            
+            while (type != null)
+            {
+                var methodInfo = type.GetMethod(methodName, bindingFlags);
+
+                if (methodInfo != null)
+                {
+                    return methodInfo;
+                }
+
+                type = type.BaseType;
+            }
+
+            return null;
+        }
     }
 }
